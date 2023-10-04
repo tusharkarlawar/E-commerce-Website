@@ -7,8 +7,6 @@ let _db;
 const mongoConnect = callback => {
   MongoClient.connect(
     'mongodb+srv://tushar99:mCLZE6AdwP1lulZ9@atlascluster.gt7xv11.mongodb.net/shop?retryWrites=true&w=majority&appName=AtlasApp'
-   
-    
   )
     .then(client => {
       console.log('Connected!');
