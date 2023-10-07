@@ -46,21 +46,20 @@ exports.getIndex = (req, res, next) => {
     });
 };
 
-
 exports.getCart = (req, res, next) => {
   req.user
-    .populate('cart.items.productId')
-    .exec()
-    .then(user => {
+    .populate("cart.items.productId")
+    .then((user) => {
       const products = user.cart.items;
-      res.render('shop/cart', {
-        path: '/cart',
-        pageTitle: 'Your Cart',
-        products: products
+      res.render("shop/cart", {
+        path: "/cart",
+        pageTitle: "Your Cart",
+        products: products,
       });
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 };
+
 
 //exports.getCart = (req, res, next) => {
 //   user.findById(req.user._id) // Assuming you have the user's ID in req.user
@@ -106,7 +105,6 @@ exports.postCartDeleteProduct = (req, res, next) => {
 exports.postOrder = (req, res, next) => {
   req.user
    .populate('cart.items.productId')
-   .execPopulate()
    .then(user => {
      const products = user.cart.items.map(i => {
       return { quantity: i.quantity, product: { ...i.productId._doc } };
